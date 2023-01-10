@@ -35,4 +35,10 @@ module.exports = cds.service.impl(async function(srv) {
        return sum;
    })
    
+
+   srv.after('CREATE' , 'Product', async(req) => {
+       console.log(req.data)
+       console.log("<<Hello After")
+   })
+   
 }) 

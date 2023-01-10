@@ -14,5 +14,8 @@ service productshop {
         //addition field'  
         expDate: String
     }
+    @odata.draft.enabled
     entity Product as projection on my.Product;
+     entity Supplier as projection on my.Supplier;
+
 }

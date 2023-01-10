@@ -1,21 +1,30 @@
-using { managed, cuid } from '@sap/cds/common';
 namespace sap.cap.ordershop;
-//sap.cap.product.Product{}
-//@sap/cds/common --> country, managed; cuid; language; currency
+
+using {
+    managed,
+    cuid,
+    Currency,
+    Country
+} from '@sap/cds/common';
 
 aspect additionInfo {
     mfgDate : String;
 }
-//Types, Aspect and Extend
-    entity Product : additionInfo, managed, cuid{
-        name : String;
-        stock : Integer;
-        price : Integer
-       // cost : PriceDetails //Cost will access pricedetails field using cost_price
-    }
 
+entity Product : managed, additionInfo, cuid {
+        name     : String;
+        stock    : Integer;
+        price    : Integer;
+        currency : Currency;
+        emission : Integer;
+        supplier : Association to Supplier; 
+}
 
-    // type PriceDetails {
-    //  price : String;
-    // }
-
+entity Supplier {
+    key ID          : Integer;
+        CompanyName : String(100);
+        Address     : String(100);
+        Phone       : String(100);
+        product     : Association to many Product
+                          on product.supplier = $self;
+}
