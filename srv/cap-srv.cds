@@ -10,11 +10,16 @@ service productshop {
     function MyFunction(category : Integer) returns object;
     action MyAction(input : object) returns object;
 
+//emit events
+   event myEventName: {
+    myEventProperty: Integer;
+   }
+
     extend my.Product with {
         //addition field'  
         expDate: String
     }
-    @odata.draft.enabled
+   // @odata.draft.enabled
     entity Product as projection on my.Product;
      entity Supplier as projection on my.Supplier;
 
