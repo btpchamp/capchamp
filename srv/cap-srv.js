@@ -40,14 +40,13 @@ module.exports = cds.service.impl(async function(srv) {
 
 
 //INSERT Query
-       //INSERT Query
-   //     let Payload = {
-   //         "ID" : 301,
-   //         "CompanyName" : "Jack & Jones",
-   //         "Address" : "India"
-   //     }
-   //    const bp = await cds.run(INSERT.into(Supplier).entries(Payload));
-   //    console.log("<<<insert bp", bp)
+       let Payload = {
+           "ID" : 301,
+           "CompanyName" : "Denims",
+           "Address" : "Germany"
+       }
+      const bp = await cds.run(INSERT.into(Supplier).entries(Payload));
+      console.log("<<<insert bp", bp)
 
        return sum;
    })
@@ -97,4 +96,4 @@ module.exports = cds.service.impl(async function(srv) {
 //     //change the stock = stock + 10
 // })
    
-}) 
+})  

@@ -15,12 +15,9 @@ service productshop {
     myEventProperty: Integer;
    }
 
-    extend my.Product with {
-        //addition field'  
-        expDate: String
-    }
-   // @odata.draft.enabled
+   // explain sqlite deployment command in readme
+    @odata.draft.enabled
     entity Product as projection on my.Product;
-     entity Supplier as projection on my.Supplier;
+    entity Supplier as projection on my.Supplier;
 
 }
