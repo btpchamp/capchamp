@@ -20,5 +20,20 @@ File or Folder | Purpose
 - Start adding content, for example, a [db/schema.cds](db/schema.cds).
 
 
+## How to Deploy to Sqlite 3
+- From your Project Folder, Enter Command **npm install sqlite3 -d**
+- Deploy your initial csv data to sqlite using commsnd **cds deploy --to sqlite**
+
+## Create Fiori Application from Template
+- Navigate to Homepage and click **Create from Template**
+- Select Application Type **SAP Fiori Elements**
+- Select **List Report Page**
+- select Data Source **Use Local CAP Project**
+- Give your CAP Foler Path
+- Select odata service **productshop (Nodejs)**
+- Select main entity **Product**
+- in application namespace give **ns**
+
+
 
 
