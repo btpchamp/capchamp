@@ -1,4 +1,4 @@
-ID;name;stock;price;emission;criticality;currency_code;supplier_ID
-20466921-7d57-4e76-b14c-e53fd97dcb11;Laptop;12;2.30;998;1;EUR;101
-20466921-7d57-4e76-b14c-e53fd97dcb12;MacBook;20;34.89;1021;2;EUR;101
-20466921-7d57-4e76-b14c-e53fd97dcb13;Watch;57;32.85;200;3;USD;201
+ID;name;stock;price;emission;criticality;currency_code;partner_SupplierID;image_url
+20466921-7d57-4e76-b14c-e53fd97dcb11;Laptop;12;2.30;998;1;EUR;101;https://i.dummyjson.com/data/products/9/3.png
+20466921-7d57-4e76-b14c-e53fd97dcb12;MacBook;20;34.89;1021;2;EUR;201;https://i.dummyjson.com/data/products/12/thumbnail.jpg
+20466921-7d57-4e76-b14c-e53fd97dcb13;Watch;57;32.85;200;3;USD;201;https://i.dummyjson.com/data/products/1/thumbnail.jpg

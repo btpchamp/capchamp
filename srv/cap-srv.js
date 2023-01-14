@@ -33,67 +33,15 @@ module.exports = cds.service.impl(async function(srv) {
 
    srv.on('addNumber', async(req) => {
        let sum = req.data.a + req.data.b;
-       // const event = {
-       //     "Addition" : sum        
-       // }
-       // srv.emit('myEventName',event) // This will emit the events
-
-
-//INSERT Query
-       let Payload = {
-           "ID" : 301,
-           "CompanyName" : "Denims",
-           "Address" : "Germany"
-       }
-      const bp = await cds.run(INSERT.into(Supplier).entries(Payload));
-      console.log("<<<insert bp", bp)
-
        return sum;
    })
 
-//this service handler will listen the events which is triggered from emit inside add number fucntion
-   // srv.on('myEventName', (msg) => {
-   //     console.log("<<<1st message listened", msg)
-   //     console.log("<<<<fetch addition value", msg.data.Addition)
-   // })
+
+   srv.on('updateProduct', async(req) => {
+       if(req.data.stock < 1 ) req.reject (400, 'Order should be have to greater than 1')    
+       const updProduct = await UPDATE(Product).with({stock:req.data.stock}).where({name:req.data.name});
+       console.log("<<Product Updated ", updProduct)
+   })
+
    
- //  srv.on('READ' , 'Supplier', async(req) => {
-
-// uncomment the below query and start exploring
-
-//SELECT Query
-    //const bp = await cds.run(SELECT.from(Supplier)). // way 1
-   // const bp = await cds.run(SELECT.from(Supplier).where({ID:201})) //way 2
-   //const bp = await cds.read(Supplier).where({ID:201}) // way 3
-  // const bp = await SELECT.from(Supplier).where({ID:101}) //way 4
-//  const bp = await cds.run(SELECT `ID,CompanyName` .from(Supplierte p)) //way 4. /CompanyName
-
-   //  console.log("<<Insert query print ", bp)
-   //  return bp;
-
-//UPDATE
-//const bpUpdate = await cds.run(UPDATE(Supplier).with({Phone : 5643}).where({ID:<ID no. of supplier>}))
-//  console.log("updation of BP ", bpUpdate);
-//  return bpUpdate;
-
-
-
-//})
-
-//Event will be triggered after creation 
-// srv.before('READ' , 'Product', async(req) => {
-//     console.log("<<Hello I am in BEFORE Handler")
-//     //if user.auth != admin rej.reject(400, Not authorized)
-// })
-
-//srv.on('READ' , 'Product', async(req) => {
-//     console.log("<<Hello I am in ON Handler")
-//     fetch the data and show the resp
-//}) 
-
-// srv.after('READ' , 'Product', async(req) => {
-//     console.log("<<Hello I am in AFTER Handler")
-//     //change the stock = stock + 10
-// })
-   
-})  
+}) 

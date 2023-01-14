@@ -10,20 +10,25 @@ using {
 entity Product : managed, cuid {
         name     : String;
         stock    : Integer;
+        partner  : Association to Supplier; 
+        ord      : Composition of many Orders on ord.execution = $self;
         price    : Integer;
         currency : Currency;
         emission : Integer;
         criticality : Integer;
-        supplier : Association to Supplier; 
+        image_url  : String
 }
 
 entity Supplier {
-    key ID          : Integer;
+    key SupplierID  : Integer;
         CompanyName : String;
         Address     : String;
         Phone       : String;
-        product     : Association to many Product
-                          on product.supplier = $self;
+}
+
+entity Orders : managed , cuid{
+    orderDetail : LargeString;
+    execution   : Association to Product
 }
 
 
