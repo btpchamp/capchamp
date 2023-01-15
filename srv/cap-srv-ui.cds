@@ -15,9 +15,9 @@ using productshop from './cap-srv';
 
  annotate productshop.Supplier with {
     SupplierID @title : 'Supplier ID';
-    CompanyName @title : 'Company';
-    Address @title : 'Address';
-    Phone @title : 'Contact No'
+    CompanyName @title : 'Company' @readonly;
+    Address @title : 'Address' @readonly;
+    Phone @title : 'Contact No.' @readonly
  };
  
 
@@ -43,29 +43,59 @@ using productshop from './cap-srv';
       },
       SelectionFields  : [name, stock, emission],
       LineItem  : [
-            {$Type : 'UI.DataField', Value: partner_SupplierID},
+            {$Type : 'UI.DataField', Value: partner_SupplierID},  //![@HTML5.CssDefaults] : { width : '25%'}
             {$Type : 'UI.DataField', Value: image_url},   
             {$Type : 'UI.DataField', Value: name, ![@UI.Importance] : #High },
             {
               Value: emission,
               Criticality : criticality
             },
-            
+            {
+              $Type : 'UI.DataFieldForAction',
+              Action :  'productshop.orderProduct',
+              Label : '{i18n> Place Order}'
+            }              
       ],
       Identification  : [
-                  {
+              {
               $Type : 'UI.DataFieldForAction',
               Action :  'productshop.updateProduct',
               Label : '{i18n> Update Quantity}'
             }       
       ],
-      
-
-
-
+      Facets  : [
+            {$Type: 'UI.ReferenceFacet', Label: 'Supplier Information', Target : '@UI.FieldGroup#Main'},
+            {$Type: 'UI.ReferenceFacet', Label: 'Emission Report', Target : '@UI.FieldGroup#Emission'},
+            {$Type: 'UI.ReferenceFacet', Label: 'Order Details', Target : '@UI.FieldGroup#Order'}
+      ],
+      FieldGroup#Main  : {
+          Data : [
+              {Value : partner_SupplierID},
+              {Value : partner.CompanyName},
+              {Value : partner.Address}
+          ]          
+      },
+      FieldGroup#Emission  : {
+          Data : [
+              {
+                Value : emission,
+                Criticality : criticality
+              }
+          ]         
+      },
+      FieldGroup#Order  : {
+          Data : [
+              {Value : ord.orderDetail},
+          ]          
+      },      
 
     }
  ) {}; 
+
+ annotate productshop.Product with {
+    image_url @( Common.Label : 'Product Image',  UI.IsImageURL : true)
+ };
+ 
 
 
 
