@@ -2,7 +2,32 @@ const cds = require('@sap/cds');
 
 module.exports = cds.service.impl(async function(srv) {
    const { Product , Supplier, Orders } = srv.entities
-   console.log('Outside of my service entity/function hello World') // Print the message in Nodejs
+
+   srv.before ('CREATE','Product', (req)=>{
+    const createProduct = req.data
+  //  if (createProduct.emission > '50000')  throw new Error("400,`Product not Sustainable`")
+    if (createProduct.emission > '50000')  return req.error ({
+        code: '400',
+        message: 'Product not Sustainable stock ${stock}',
+        target: '${createProduct.emission}',
+        status: 500
+      })
+
+    //  409,`${quantity} exceeds stock for book #${book}`)
+  })
+
+   srv.after('READ', 'Product', productData => { 
+    const products = Array.isArray(productData) ? productData : [productData]; 
+    products.forEach(product => { 
+        if(product.emission >=1001) {  
+            product.criticality = 1;
+        } else {
+            product.criticality = 2;
+        } 
+    
+    })
+})
+
    srv.on('hello', req => {
       `Hello ${req.data.to}!`
    })  

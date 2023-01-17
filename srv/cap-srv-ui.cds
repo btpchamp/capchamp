@@ -3,7 +3,7 @@ using productshop from './cap-srv';
 
  annotate productshop.Product with {
     ID @title : 'Product ID';
-    name @title : 'Product Name';
+    name @title : 'Product Name'; 
     stock @title : 'Quantity';
     price @title : 'Price';
     emission @title : 'Emission';
@@ -29,7 +29,6 @@ using productshop from './cap-srv';
    annotate productshop.Product with @(
     UI: {
       HeaderInfo  : {
-          $Type : 'UI.HeaderInfoType',
           TypeName : 'Product',
           TypeNamePlural : 'Products',
           Title : {
@@ -45,7 +44,8 @@ using productshop from './cap-srv';
       LineItem  : [
             {$Type : 'UI.DataField', Value: partner_SupplierID},  //![@HTML5.CssDefaults] : { width : '25%'}
             {$Type : 'UI.DataField', Value: image_url},   
-            {$Type : 'UI.DataField', Value: name, ![@UI.Importance] : #High },
+            {$Type : 'UI.DataField', Value: name },
+            {$Type : 'UI.DataField', Value: stock },
             {
               Value: emission,
               Criticality : criticality
@@ -63,16 +63,18 @@ using productshop from './cap-srv';
               Label : '{i18n> Update Quantity}'
             }       
       ],
+
       Facets  : [
-            {$Type: 'UI.ReferenceFacet', Label: 'Supplier Information', Target : '@UI.FieldGroup#Main'},
+            {$Type: 'UI.ReferenceFacet', Label: 'Supplier Information', Target : '@UI.FieldGroup#Supp'},
             {$Type: 'UI.ReferenceFacet', Label: 'Emission Report', Target : '@UI.FieldGroup#Emission'},
             {$Type: 'UI.ReferenceFacet', Label: 'Order Details', Target : '@UI.FieldGroup#Order'}
       ],
-      FieldGroup#Main  : {
+      FieldGroup#Supp  : {
           Data : [
               {Value : partner_SupplierID},
               {Value : partner.CompanyName},
-              {Value : partner.Address}
+              {Value : partner.Address},
+              {$Type : 'UI.DataField', Value: image_url}
           ]          
       },
       FieldGroup#Emission  : {
@@ -93,9 +95,42 @@ using productshop from './cap-srv';
  ) {}; 
 
  annotate productshop.Product with {
-    image_url @( Common.Label : 'Product Image',  UI.IsImageURL : true)
+   // image_url @( Common.Label : 'Product Image',  UI.IsImageURL : true)
  };
  
+
+  annotate productshop.Product  with {
+	partner @(
+		Common: {
+                ValueList: {
+                    Label: 'Supplier',
+                    CollectionPath: 'Supplier',
+                    Parameters: [
+                        { $Type: 'Common.ValueListParameterInOut',
+                            LocalDataProperty: partner_SupplierID,
+                            ValueListProperty: 'SupplierID'
+                        },
+                    { $Type: 'Common.ValueListParameterDisplayOnly',
+                            ValueListProperty: 'CompanyName'
+                        },
+                    { $Type: 'Common.ValueListParameterDisplayOnly',
+                            ValueListProperty: 'Address'
+                        },
+                    ]
+			},
+        SideEffects : {
+        EffectTypes      : #ValueChange,
+        SourceProperties : [partner_SupplierID],
+        TargetProperties : [
+            partner.CompanyName,
+            partner.Address,
+        ]
+    }      
+        }
+	);
+}
+
+ annotate productshop.Supplier with @Capabilities.SearchRestrictions.Searchable : false;
 
 
 

@@ -8,7 +8,7 @@ using {
 } from '@sap/cds/common';
 
 entity Product : managed, cuid {
-        name     : String;
+       key name     : String;
         stock    : Integer;
         partner  : Association to Supplier; 
         ord      : Composition of many Orders on ord.execution = $self;
