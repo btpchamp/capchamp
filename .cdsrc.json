@@ -1,1 +1,25 @@
-{}
+{
+    "[development]": {
+        "auth": {
+            "passport": {
+                "strategy": "mock",
+                "users": {
+                    "product.viewer@tester.com": {
+                        "password": "welcome",
+                        "ID": "product.viewer@tester.com",
+                        "roles": [
+                            "ProductViewer"
+                        ]
+                    },
+                    "product.manager@tester.com": {
+                        "password": "welcome",
+                        "ID": "product.manager@tester.com",
+                        "roles": [
+                            "ProductManager"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

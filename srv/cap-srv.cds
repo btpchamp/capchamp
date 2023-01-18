@@ -2,7 +2,16 @@
 using { sap.cap.ordershop as my } from '../db/schema';
 service productshop {
   @odata.draft.enabled
-  entity Product as projection on my.Product actions {
+  entity Product @(restrict : [
+            {
+                grant : [ 'READ' ],
+                to : [ 'ProductViewer' ]
+            },
+            {
+                grant : [ '*' ],
+                to : [ 'ProductManager' ]
+            }
+        ]) as projection on my.Product actions {
   action orderProduct(name: String @title : 'Product Name' ,stock : Integer @title : 'Quantity') ;
   action updateProduct(name: String @title : 'Product Name' ,stock : Integer @title : 'Quantity');
   }

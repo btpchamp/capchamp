@@ -3,7 +3,7 @@ using { productshop } from './cap-srv';
 
 extend service productshop {
   @readonly
-  entity ProductAnalysis  as projection on my.Product {
+  entity productAnalysis  as projection on my.Product {
     *,
     substring(createdAt,1,4) as riskyear:String,
     cast (substring(createdAt,1,10) as Date) as createdAt
