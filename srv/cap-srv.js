@@ -1,5 +1,6 @@
 const cds = require('@sap/cds');
 
+// conection to external service npm install @sap-cloud-sdk/http-client
 module.exports = cds.service.impl(async function(srv) {
    const { Product , Supplier, Orders } = srv.entities
 
@@ -96,3 +97,4 @@ module.exports = cds.service.impl(async function(srv) {
 
    
 }) 
+
