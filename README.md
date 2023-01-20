@@ -34,6 +34,15 @@ File or Folder | Purpose
 - Select main entity **Product**
 - in application namespace give **ns**
 
+## ## MTA Deployment -> Develop -> Build --> Deploy
+
+-  cds add hana,mta,xsuaa,approuter --for production
+-  npm update --package-lock-only
+-  mbt build -t gen --mtar mta.tar
+-  cf deploy gen/mta.tar
+
+
+
 
 
 
