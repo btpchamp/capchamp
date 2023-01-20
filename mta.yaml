@@ -24,7 +24,7 @@ modules:
     requires:
       - name: productshop-auth
 
-  - name: productshop
+  - name: productshop-approuter
     type: approuter.nodejs
     path: app/ # from cds.env.folders. Consider also cds.env.build.target -> gen/app
     parameters:
