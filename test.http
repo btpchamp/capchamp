@@ -4,8 +4,6 @@
 
 #GET http://localhost:4004/productshop/MyFunction(category=2) 
 
-#GET http://localhost:4004/productshop/Product
-
 #GET http://localhost:4004/productshop/Supplier?$expand=product
 
 POST  http://localhost:4004/productshop/Product

@@ -41,6 +41,11 @@ File or Folder | Purpose
 -  mbt build -t gen --mtar mta.tar
 -  cf deploy gen/mta.tar
 
+## Tutorials for GIT
+- git remote -v 
+- git status
+- git add .
+
 
 
 
