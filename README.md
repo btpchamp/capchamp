@@ -42,9 +42,15 @@ File or Folder | Purpose
 -  cf deploy gen/mta.tar
 
 ## Tutorials for GIT
+- git init ---> Mandatory task to initlise the GIT
+- git help / git help -a
 - git remote -v 
 - git status
 - git add .
+- git branch
+- git commit -m "git knowledge"
+- git checkout -b "git-rampup"
+- git push origin git-rampup
 
 
 
