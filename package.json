@@ -53,7 +53,10 @@
           "kind": "xsuaa"
         },
         "db": {
-          "kind": "sql"
+          "kind": "sqlite",
+          "credentials": {
+            "database": "db.sqlite"
+          }
         },
         "approuter": {
           "kind": "cloudfoundry"
