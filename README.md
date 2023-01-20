@@ -48,7 +48,7 @@ File or Folder | Purpose
 - git help / git help -a
 - git remote -v 
 - git status
-- git add .
+- git add . //add 
 - git branch
 - git commit -m "git knowledge"
 - git checkout -b "git-rampup"
