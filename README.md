@@ -43,6 +43,8 @@ File or Folder | Purpose
 
 ## Tutorials for GIT
 - git init ---> Mandatory task to initlise the GIT
+- git remote add origin https://github.com/btpchamp/capchamp.git -> to add origin
+- git remote rm origin --> Delete your exisitng origin
 - git help / git help -a
 - git remote -v 
 - git status
