@@ -1,1 +1,0 @@
-using productshop as service from '../../srv/cap-srv';
