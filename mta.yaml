@@ -23,15 +23,6 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: productshop-auth
-      - name: productshop-db
-
-  - name: productshop-db-deployer
-    type: hdb
-    path: gen/db
-    parameters:
-      buildpack: nodejs_buildpack
-    requires:
-      - name: productshop-db
 
   - name: productshop
     type: approuter.nodejs
@@ -59,8 +50,3 @@ resources:
       config:
         xsappname: productshop-${org}-${space}
         tenant-mode: dedicated
-  - name: productshop-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
