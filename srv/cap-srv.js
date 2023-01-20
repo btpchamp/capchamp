@@ -2,6 +2,34 @@ const cds = require('@sap/cds');
 
 // conection to external service npm install @sap-cloud-sdk/http-client
 module.exports = cds.service.impl(async function(srv) {
+
+
+    // const { registerDestination: MyRequest } = require('@sap-cloud-sdk/connectivity');
+    // const destination = {
+    //     name: 'MY-DESTINATION',
+    //     url: 'https://mys4hana.com'
+    //   };
+      
+    //   const register = await MyRequest(destination);
+    //   const record = MyRequest.execute({ url: 'MY-DESTINATION' });
+
+
+//     const { sendMail, MailConfig } = require ('@sap-cloud-sdk/mail-client');
+
+//     const mailConfig = {
+//       from: 'from@example.com',
+//       to: 'to@example.com',
+//       subject: 'e-mail subject',
+//       text: 'e-mail text'
+//     }; 
+
+//   let mailSend = await sendMail({ destinationName: 'my-mail-destination' }, [mailConfig]);
+
+
+
+
+
+
    const { Product , Supplier, Orders } = srv.entities
 
    srv.before ('CREATE','Product', (req)=>{
@@ -63,37 +91,10 @@ module.exports = cds.service.impl(async function(srv) {
    })
 
 
-   srv.on('updateProduct', async(req) => {
-       if(req.data.stock < 1 ) req.reject (400, 'Order should be have to greater than 1')    
-       const updProduct = await UPDATE(Product).with({stock:req.data.stock}).where({name:req.data.name});
-       console.log("<<Product Updated ", updProduct)
-   })
 
 
-   srv.on('orderProduct', async(req) => {
-       const now = req.timestamp;   //Fetch the current system date and time
-       console.log("<<<system time", now)
-       if(req.data.stock < 1 ) return req.reject(400, 'Quantitiy has to be greater than 0')
-       //lets suppoese your Laptop has 10 stock and you pleaced an order with quantity 15
-       const quan = await SELECT `stock` .from(Product).where({name:req.data.name});
-       console.log("<< Stock in DB ",quan) // [ { stock: 70 } ]
-       if(req.data.stock > quan[0].stock ) return req.reject (400, 'Ordered Quantity greater than stock');
-       let netStock = quan[0].stock - req.data.stock;
-       const updProd = await UPDATE(Product).with({stock:netStock}).where({name:req.data.name}) // Updated the net stock on our Product entity
-       //Create Orders
-       //Fetch Product ID
-       const productID = await SELECT `ID` .from(Product).where({name:req.data.name});
-       console.log("<<<< Product ID ", productID);
-       //Create JSON Payload for Order
-       const orderJSON = {
-           orderDetail:req.data.name + ` Ordered on ` + now + ` with stock ` + req.data.stock,
-           execution_ID:productID[0].ID
-       }
-       console.log("<<<<Order JSON ", orderJSON)
-       const orderCreate = await INSERT (orderJSON).into(Orders);
-       console.log("<<<Order Create", orderCreate)
-       return req.notify(`Product ` + req.data.name + ` Ordered `);
-       })
+
+
 
    
 }) 
